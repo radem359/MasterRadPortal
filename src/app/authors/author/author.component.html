@@ -1,0 +1,50 @@
+<mat-toolbar>
+    <span>
+        {{service.form.controls['$id'].value?"Modify Author":"New Author"}}
+    </span>
+    <span class="fill-remaining-space"></span>
+    <button class="btn-dialog-close" mat-stroked-button (click)="onClose()" tabIndex="-1"><mat-icon>clear</mat-icon></button>
+</mat-toolbar>
+<form [formGroup] = "service.form" class="normal-form" (submit) = "onSubmit()">
+    <mat-grid-list cols="2" rowHeight="300px">
+        <mat-grid-tile>
+            <div class="controles-container">
+                <input type="hidden" formControlName = "$id">
+                <mat-form-field>
+                    <input formControlName = "authorName" matInput placeholder="Author name *">
+                    <mat-error>
+                        This field is mandatory!
+                    </mat-error>
+                </mat-form-field>
+
+                <mat-form-field>
+                    <mat-label>Natinality *</mat-label>
+                    <mat-select formControlName="nationality">
+                        <ng-container *ngFor = "let nationality of cNationalities">
+                            <mat-option [value]="nationality">{{nationality.nationalityName}}</mat-option>
+                        </ng-container>
+                    </mat-select>
+                    <mat-error>
+                        This field is mandatory! If list is empty, go create nationality.
+                    </mat-error>
+                </mat-form-field>
+
+                <mat-form-field>
+                    <mat-label>Books</mat-label>
+                    <mat-select 
+                        formControlName="books" 
+                        multiple>
+                        <ng-container *ngFor = "let book of cBooks">
+                            <mat-option [value]="book">{{book.bookName}}</mat-option>
+                        </ng-container>
+                    </mat-select>
+                </mat-form-field>
+                <div class="button-row">
+                    <button mat-raised-button color="primary" type="submit">Submit</button>
+                    <button mat-raised-button color="warn"
+                    (click) = "onClear()">Clear</button>
+                </div>
+            </div>
+        </mat-grid-tile>
+    </mat-grid-list>
+</form>

@@ -1,0 +1,39 @@
+<mat-toolbar color="primary" class="mar-elevation-zB">
+    <span>Private Library</span>
+    <a mat-button routerLink="Books">Books</a>
+    <a mat-button routerLink="Authors" *ngIf="service.loggedUser.value.$id != null">Authors</a>
+    <a mat-button routerLink="Languages" *ngIf="service.loggedUser.value.$id != null">Languages</a>
+    <a mat-button routerLink="Genres" *ngIf="service.loggedUser.value.$id != null">Genres</a>
+    <a mat-button routerLink="Nationalities" *ngIf="service.loggedUser.value.$id != null">Nationalities</a>
+    <a mat-button routerLink="Users" *ngIf="service.loggedUser.value.$id != null && service.loggedUser.value.isAdmin">Users</a>
+
+    <div class="spacer"></div>
+    <button  mat-button color  [matMenuTriggerFor]="menu">
+        <mat-icon *ngIf="service.loggedUser.value.$id === null">keyboard_arrow_down</mat-icon>
+        <div *ngIf="service.loggedUser.value.$id !== null">
+            {{service.loggedUser.value.username}}
+        </div>
+    </button>
+    <mat-menu #menu="matMenu">
+        <button mat-menu-item
+        *ngIf="service.loggedUser.value.$id === null" 
+        routerLink="LogIn">
+            Log In
+        </button>
+        <button mat-menu-item 
+        *ngIf="service.loggedUser.value.$id === null" 
+        routerLink="Register">
+            Register
+        </button>
+        <button mat-menu-item
+        *ngIf="service.loggedUser.value.$id !== null"
+        (click) = "toUser()">
+            User Profile
+        </button>
+        <button mat-menu-item
+        *ngIf="service.loggedUser.value.$id !== null"
+        (click) = "logOut()">
+            Log Out
+        </button>
+    </mat-menu>
+</mat-toolbar>

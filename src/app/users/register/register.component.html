@@ -1,0 +1,39 @@
+<div fxLayoutAlign="center center" style ="width: 100%;" class="main-div">
+    <mat-card fxFlex="25">
+        <mat-toolbar color="primary">Registration</mat-toolbar>
+        <form [formGroup] = "service.register" (submit) = "onSubmit()" fxLayoutAlign = "strech" fxLayout="column" class="login-form">
+
+            <mat-form-field>
+                <input formControlName = "username" matInput placeholder="Username *" autocomplete="false" readonly onfocus="this.removeAttribute('readonly');">
+                <mat-error>
+                    This field is mandatory!
+                </mat-error>
+            </mat-form-field>
+
+            <mat-form-field>
+                <input formControlName = "password" type="password" 
+                matInput placeholder="Password *" autocomplete="false"
+                (change) = "passwordMatch()">
+                <mat-error>
+                    This field is mandatory!
+                </mat-error>
+            </mat-form-field>
+
+            <mat-form-field>
+                <input formControlName = "confirmPassword" type="password" 
+                matInput placeholder="Confirm password *" autocomplete="false"
+                (change) = "passwordMatch()">
+                <mat-error>
+                    This field is mandatory!
+                </mat-error>
+            </mat-form-field>
+            <mat-error class="text-danger"
+            style="margin-top: 10px;" *ngIf = "!passwordMatch()">
+                    {{message}}
+            </mat-error>
+            
+            <button mat-raised-button color="primary" style="margin-top: 10px;" type="submit">Register</button>
+        </form>
+          
+    </mat-card>
+</div>

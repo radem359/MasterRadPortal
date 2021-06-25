@@ -1,0 +1,23 @@
+<div fxLayoutAlign="center center" style ="width: 100%;" class="main-div">
+    <mat-card fxFlex="25">
+        <mat-toolbar color="primary">Log In Page</mat-toolbar>
+        <form [formGroup] = "service.tryLog" (submit) = "onSubmit()" fxLayoutAlign = "strech" fxLayout="column" class="login-form">
+
+            <mat-form-field>
+                <input formControlName = "username" matInput placeholder="Username *" autocomplete="false" readonly onfocus="this.removeAttribute('readonly');">
+                <mat-error>
+                    This field is mandatory!
+                </mat-error>
+            </mat-form-field>
+
+            <mat-form-field>
+                <input formControlName = "password" type="password" matInput placeholder="Password *" autocomplete="false">
+                <mat-error>
+                    This field is mandatory!
+                </mat-error>
+            </mat-form-field>
+            <button mat-raised-button color="primary" type="submit">Log In</button>
+        </form>
+          
+    </mat-card>
+</div>
